@@ -4,11 +4,13 @@
 
 void sortProducts(Product products[], int size) {
   bool done = false;
+  int comparisions = 0;
 
   while (!done) {
     bool swapped = false;
 
     for (int i = 0; i < size; i++) {
+      comparisions++;
       if (i > 0 && products[i - 1].price > products[i].price) {
         Product tmp = products[i - 1];
         products[i - 1] = products[i];
@@ -22,6 +24,8 @@ void sortProducts(Product products[], int size) {
       done = true;
     }
   }
+
+  std::cout << "Comparisions: " << comparisions << std::endl;
 
   return;
 }
