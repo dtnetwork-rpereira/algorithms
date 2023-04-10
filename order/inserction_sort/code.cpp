@@ -3,6 +3,16 @@
 #include <cstdlib>
 #include "../product.h"
 
+void swap(Product products[], int currentIndex, int newIndex) {
+  Product currentProduct = products[currentIndex];
+  Product previousProduct = products[newIndex];
+
+  products[newIndex] = currentProduct;
+  products[currentIndex] = previousProduct;
+
+//  std::cout << "Products Swapped" << std::endl;
+}
+
 void sortProducts(Product products[], int size) {
   int comparisions = 0;
 
@@ -12,11 +22,7 @@ void sortProducts(Product products[], int size) {
     int currentIndex = i;
     
     while (products[currentIndex].price < products[currentIndex - 1].price) {
-      Product currentProduct = products[currentIndex];
-      Product previousProduct = products[currentIndex - 1];
-
-      products[currentIndex - 1] = currentProduct;
-      products[currentIndex] = previousProduct;
+      swap(products, currentIndex, currentIndex - 1);
 
       comparisions++;
       currentIndex--;
