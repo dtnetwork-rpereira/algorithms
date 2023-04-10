@@ -29,7 +29,7 @@ class Sort {
       }
     }
 
-    void InserctionAlgorithm(Product products[], int array_size) {
+    void InsertionAlgorithm(Product products[], int array_size) {
       if (array_size < 1) return;
 
       for (int i = 1; i < array_size; i++) {
