@@ -35,7 +35,7 @@ class Sort {
       for (int i = 1; i < array_size; i++) {
         int currentIndex = i;
 
-        while (products[currentIndex].price < products[currentIndex - 1].price) {
+        while (currentIndex > 0 && products[currentIndex].price < products[currentIndex - 1].price) {
           SwapArray(products, currentIndex, currentIndex - 1);
           currentIndex--;
         }
