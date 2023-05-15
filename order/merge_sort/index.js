@@ -2,36 +2,36 @@ import { Guns } from '../guns.mjs';
 // const { Guns } = pkg;
 
 function mergeArrays(arrayOne, arrayTwo) {
-  const newArray = [];
-  const done = false;
+  let newArray = [];
 
   let arrayOneIndex = 0;
   let arrayTwoIndex = 0;
-  let counter = 0;
   
-  while (!done) {
-    if (arrayOne.length + arrayTwo.length == counter) done = true;
-
+  while (arrayOneIndex < arrayOne.length || arrayTwoIndex < arrayTwo.length) {
     const item1 = arrayOne[arrayOneIndex];
     const item2 = arrayTwo[arrayTwoIndex];
 
     if (!item1) {
       newArray.push(item2);
       arrayTwoIndex++;
+
+      /* newArray = [...newArray, ...arrayTwo.slice(arrayTwoIndex)]
+      arrayTwoIndex = arrayTwo.length; */
     } else if (!item2) {
       newArray.push(item1);
       arrayOneIndex++;
+
+      /* newArray = [...newArray, ...arrayOne.slice(arrayOneIndex)];
+      arrayOneIndex = arrayOne.length; */
     } else {
       if (item1.price < item2.price) {
         newArray.push(item1);
         arrayOneIndex++;
-      } else {
+      } else if (item1.price > item2.price) {
         newArray.push(item2);
         arrayTwoIndex++;
       }
     }
-
-    counter++;
   }
 
   return newArray;
@@ -48,4 +48,4 @@ gunGroupTwo.add({ name: 'Grenades (5x)', price: 250 });
 gunGroupTwo.add({ name: 'Shield', price: 259.99 });
 gunGroupTwo.add({ name: 'Krauser\'s Knife', price: 301 });
 
-console.log(mergeArrays(gunGroupOne, gunGroupTwo));
+console.log(mergeArrays(gunGroupOne.arsenal, gunGroupTwo.arsenal));
