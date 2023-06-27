@@ -1,4 +1,4 @@
-const steps = [];
+let steps = [];
 
 function SwapItems(gunsArray, indexOne, indexTwo) {
   [gunsArray[indexOne], gunsArray[indexTwo]] = [
@@ -12,20 +12,32 @@ function SwapItems(gunsArray, indexOne, indexTwo) {
   });
 }
 
-function GunSort(gunsToSort = []) {
-  for (let index = 1; index < gunsToSort.length; index++) {
-    let previousIndex = index - 1;
-    let currentIndex = index;
+function FindCheaperGun(gunsToSort, startPosition = 0, endPosition) {
+  let cheapGunIndex;
 
-    while (
-      previousIndex >= 0 &&
-      gunsToSort[currentIndex].price < gunsToSort[previousIndex].price
+  for (let index = startPosition; index < endPosition; index++) {
+    if (
+      cheapGunIndex == undefined ||
+      gunsToSort[index].price < gunsToSort[cheapGunIndex].price
     ) {
-      SwapItems(gunsToSort, currentIndex, previousIndex);
-
-      currentIndex--;
-      previousIndex--;
+      cheapGunIndex = index;
     }
+  }
+
+  steps.push(`Found in position ${cheapGunIndex}`);
+
+  return cheapGunIndex;
+}
+
+function GunSort(gunsToSort = []) {
+  const maxArsenalSize = gunsToSort.length;
+  steps = [];
+
+  for (let index = 0; index < maxArsenalSize - 1; index++) {
+    steps.push(`Position ${index}`);
+    steps.push("Searching");
+    const cheapGunIndex = FindCheaperGun(gunsToSort, index, maxArsenalSize);
+    SwapItems(gunsToSort, cheapGunIndex, index);
   }
 
   return gunsToSort;

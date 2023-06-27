@@ -20,16 +20,33 @@ describe("Selection Sort", () => {
       { name: "Minigun", price: 99.99 },
     ];
 
+    assert.deepEqual(sortedArray, mockedSort);
+  });
+
+  it("should save steps history", () => {
+    const gun = new Guns();
+    gun.add({ name: "AK-48", price: 20.0 });
+    gun.add({ name: "Molotov", price: 10 });
+    gun.add({ name: "Minigun", price: 99.99 });
+    gun.add({ name: "AK-46", price: 19.99 });
+
+    GunSort(gun.arsenal);
+
     const mockedSteps = [
-      "Position 1",
+      "Position 0",
+      "Searching",
+      "Found in position 1",
       { from: 1, to: 0 },
+      "Position 1",
+      "Searching",
+      "Found in position 3",
+      { from: 3, to: 1 },
       "Position 2",
-      "Position 3",
+      "Searching",
+      "Found in position 3",
       { from: 3, to: 2 },
-      { from: 2, to: 1 },
     ];
 
-    assert.deepEqual(mockedSort, sortedArray);
-    assert.deepEqual(mockedSteps, steps);
+    assert.deepEqual(steps, mockedSteps);
   });
 });

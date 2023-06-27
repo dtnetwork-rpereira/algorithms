@@ -1,4 +1,4 @@
-const steps = [];
+let steps = [];
 
 function SwapItems(gunsArray, indexOne, indexTwo) {
   [gunsArray[indexOne], gunsArray[indexTwo]] = [
@@ -13,6 +13,8 @@ function SwapItems(gunsArray, indexOne, indexTwo) {
 }
 
 function GunSort(gunsToSort = []) {
+  steps = [];
+
   for (let index = 1; index < gunsToSort.length; index++) {
     let previousIndex = index - 1;
     let currentIndex = index;
