@@ -1,0 +1,13 @@
+{
+  "name": "merge_sort",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "node --test *.spec.js",
+    "test:watch": "node --watch --test *.spec.js"
+  },
+  "author": "",
+  "license": "ISC"
+}

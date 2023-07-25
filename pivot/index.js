@@ -1,15 +1,8 @@
-let steps = [];
-
 function SwapItems(gunsArray, indexOne, indexTwo) {
   [gunsArray[indexOne], gunsArray[indexTwo]] = [
     gunsArray[indexTwo],
     gunsArray[indexOne],
   ];
-
-  steps.push({
-    from: indexOne,
-    to: indexTwo,
-  });
 }
 
 function Pivot(gunsToSort = [], start = 0, end = gunsToSort.length) {
@@ -17,23 +10,22 @@ function Pivot(gunsToSort = [], start = 0, end = gunsToSort.length) {
 
   const pivot = gunsToSort[pivotGunIndex];
   let cheaperProducts = 0;
-  let organizedArray = [...gunsToSort];
 
-  for (let i = start; i < end; i++) {
+  for (let i = start; i < pivotGunIndex; i++) {
     const gun = gunsToSort[i];
 
     if (gun.price < pivot.price) {
       if (i != cheaperProducts) {
-        SwapItems(organizedArray, cheaperProducts, i);
+        SwapItems(gunsToSort, cheaperProducts, i);
       }
 
       cheaperProducts++;
     }
   }
 
-  SwapItems(organizedArray, cheaperProducts, pivotGunIndex);
+  SwapItems(gunsToSort, cheaperProducts, pivotGunIndex);
 
-  return organizedArray;
+  return gunsToSort;
 }
 
-export { Pivot, steps };
+export { Pivot };
