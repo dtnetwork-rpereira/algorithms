@@ -5,7 +5,12 @@ function SwapItems(gunsArray, indexOne, indexTwo) {
   ];
 }
 
-function Pivot(productsToSort = [], start = 0, end = productsToSort.length) {
+function Pivot(
+  productsToSort = [],
+  start = 0,
+  end = productsToSort.length,
+  property = "price"
+) {
   const endOfArray = end - 1;
 
   const pivot = productsToSort[endOfArray];
@@ -14,10 +19,8 @@ function Pivot(productsToSort = [], start = 0, end = productsToSort.length) {
   for (let i = start; i < endOfArray; i++) {
     const currentProduct = productsToSort[i];
 
-    if (currentProduct.price < pivot.price) {
-      if (i != newPivotIndex) {
-        SwapItems(productsToSort, newPivotIndex, i);
-      }
+    if (currentProduct[property] < pivot[property]) {
+      SwapItems(productsToSort, newPivotIndex, i);
 
       newPivotIndex++;
     }
@@ -27,17 +30,22 @@ function Pivot(productsToSort = [], start = 0, end = productsToSort.length) {
   return newPivotIndex;
 }
 
-function Sort(gunsToSort, start, end) {
+function Sort(gunsToSort, start, end, property) {
   if (end - start > 1) {
-    const newPivotPosition = Pivot(gunsToSort, start, end);
+    const newPivotPosition = Pivot(gunsToSort, start, end, property);
 
-    Sort(gunsToSort, start, newPivotPosition);
-    Sort(gunsToSort, newPivotPosition + 1, end);
+    Sort(gunsToSort, start, newPivotPosition, property);
+    Sort(gunsToSort, newPivotPosition + 1, end, property);
   }
 }
 
-function QuickSort(gunsToSort, start = 0, end = gunsToSort.length) {
-  Sort(gunsToSort, start, end);
+function QuickSort(
+  gunsToSort,
+  start = 0,
+  end = gunsToSort.length,
+  property = "price"
+) {
+  Sort(gunsToSort, start, end, property);
 
   return gunsToSort;
 }
