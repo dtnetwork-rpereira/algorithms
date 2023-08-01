@@ -20,6 +20,20 @@ describe("Binary Search", () => {
     assert.deepEqual(elementFoundIndex, 6);
   });
 
+  it("should return -1 with empty array", () => {
+    const arsenal = [];
+
+    const elementFoundIndex = BinarySearch(arsenal, 79.9, "price");
+    assert.deepEqual(elementFoundIndex, -1);
+  });
+
+  it("should find with one item array", () => {
+    const arsenal = [{ name: "ExtraMinigun", price: 79.9 }];
+
+    const elementFoundIndex = BinarySearch(arsenal, 79.9, "price");
+    assert.deepEqual(elementFoundIndex, 0);
+  });
+
   it("should not find axe", () => {
     const arsenal = [
       { name: "Hammer", price: 5.73 },

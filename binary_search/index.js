@@ -2,7 +2,7 @@ function Find(arsenal, valueToFound, property = "price") {
   let start = 0;
   let end = arsenal.length;
 
-  while (end - start > 1) {
+  while (end > start) {
     let middle = parseInt((start + end) / 2);
     let middleItem = arsenal[middle];
 
@@ -10,10 +10,10 @@ function Find(arsenal, valueToFound, property = "price") {
       return middle;
     }
 
-    if (valueToFound > middleItem[property]) {
-      start = middle;
+    if (valueToFound < middleItem[property]) {
+      end = middle - 1;
     } else {
-      end = middle;
+      start = middle + 1;
     }
   }
 
